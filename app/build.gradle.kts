@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.s23010344.parkzone"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
