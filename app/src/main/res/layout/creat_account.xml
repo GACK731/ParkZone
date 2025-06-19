@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <!-- App Title -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/app_name"
+        android:textSize="28sp"
+        android:layout_marginTop="60dp" />
+
+        <!-- Sub Title -->
+    <TextView
+        android:id="@+id/LoginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_login_title"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:hint="@string/txt_username_hint"
+            android:inputType="text"
+            android:fontFamily="@font/inter_light"
+            />
+
+        <EditText
+            android:id="@+id/password_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="12"
+            android:hint="@string/txt_password_hint"
+            android:inputType="textPassword"
+            android:fontFamily="@font/inter_light"/>
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_light"
+             />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:strokeWidth="2dp"
+            android:text="Login"
+            android:fontFamily="@font/inter_bold"
+            app:strokeColor="@color/theme_color"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+         />
+
+        
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
