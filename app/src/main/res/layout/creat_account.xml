@@ -7,75 +7,189 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="24dp">
+        android:orientation="vertical">
 
-        <!-- App Title -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/app_name"
-        android:textSize="28sp"
-        android:layout_marginTop="60dp" />
-
-        <!-- Sub Title -->
-    <TextView
-        android:id="@+id/LoginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lbl_login_title"
-        android:textSize="16sp"
-        android:layout_marginTop="4dp"/>
-
-        <EditText
-            android:id="@+id/username"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:hint="@string/txt_username_hint"
-            android:inputType="text"
-            android:fontFamily="@font/inter_light"
-            />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
 
-        <EditText
-            android:id="@+id/password_toggle"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/app_name"
+                android:textSize="28sp" />
+
+            <!-- Sub Title -->
+            <TextView
+                android:id="@+id/LoginTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/lbl_create_title"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="30dp"
+                android:layout_marginTop="-30dp">
+
+                    <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/inter_light"
+                android:hint="@string/txt_email_hint"
+                android:inputType="text"
+                        android:textSize="16sp"/>
+
+                <EditText
+                android:id="@+id/create_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="12"
+                android:fontFamily="@font/inter_light"
+                android:hint="@string/txt_username_hint"
+                android:inputType="text"
+                    android:textSize="16sp"/>
+
+                <EditText
+                android:id="@+id/password_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="12"
+                android:fontFamily="@font/inter_light"
+                android:hint="@string/txt_password_hint"
+                android:inputType="textPassword"
+                    android:textSize="16sp"
+                 />
+
+                <EditText
+                android:id="@+id/re_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="12"
+                android:fontFamily="@font/inter_light"
+                android:hint="@string/lbl_rpassword"
+                android:inputType="textPassword"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="agree with terms and conditions"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Create Account"
+                android:textSize="20sp"
+                app:strokeColor="@color/theme_color"
+                app:strokeWidth="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="or Login with"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="12"
-            android:hint="@string/txt_password_hint"
-            android:inputType="textPassword"
-            android:fontFamily="@font/inter_light"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:textSize="14sp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/inter_light"
-             />
+            <!-- Google Login Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGoogleLogin"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="250dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:elevation="2dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Login with Google"
+                android:textSize="16sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="28dp"
+                app:icon="@drawable/google"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="24dp"
+                app:iconTint="@null"
+                app:strokeWidth="0dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            app:strokeWidth="2dp"
-            android:text="Login"
-            android:fontFamily="@font/inter_bold"
-            app:strokeColor="@color/theme_color"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-         />
+            <!-- Facebook Login Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFacebookLogin"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="250dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:elevation="2dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="Login with Facebook"
+                android:textSize="16sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="28dp"
+                app:icon="@drawable/facebook"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="26dp"
+                app:iconTint="@null"
+                app:strokeWidth="0dp" />
 
-        
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

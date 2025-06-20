@@ -1,13 +1,21 @@
 <resources>
+
+<!--LOADING PAGE-->
     <string name="app_name">ParkZone</string>
     <string name="tagline">Smart Parking Starts Here</string>
 
-    <string name="lbl_login_title">Loging to your account</string>
-    <string name="txt_username_hint">Enter your Username</string>
+<!--LOGIN PAGE-->
+    <string name="lbl_login_title">Login to your account</string>
+    <string name="txt_email_hint">Enter your Email</string>
     <string name="txt_password_hint">Enter your Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="Sign">If you don’t have a account?</string>
     <string name="Sign_up"> Sign Up</string>
+
+<!--CREATE ACCOUNT PAGE-->
+    <string name="lbl_create_title">Create to your account</string>
+    <string name="txt_username_hint">Enter your Username</string>
+    <string name="lbl_rpassword">Re-Enter your Password</string>
 
 
 
