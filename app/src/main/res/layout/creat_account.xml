@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/create_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -54,49 +54,49 @@
                 android:padding="30dp"
                 android:layout_marginTop="-30dp">
 
-                    <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/inter_light"
-                android:hint="@string/txt_email_hint"
-                android:inputType="text"
-                        android:textSize="16sp"/>
+                        <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:fontFamily="@font/inter_light"
+                        android:hint="@string/txt_email_hint"
+                        android:inputType="text"
+                            android:textSize="16sp"/>
 
-                <EditText
-                android:id="@+id/create_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="12"
-                android:fontFamily="@font/inter_light"
-                android:hint="@string/txt_username_hint"
-                android:inputType="text"
-                    android:textSize="16sp"/>
+                        <EditText
+                        android:id="@+id/create_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:ems="12"
+                        android:fontFamily="@font/inter_light"
+                        android:hint="@string/txt_username_hint"
+                        android:inputType="text"
+                            android:textSize="16sp"/>
 
-                <EditText
-                android:id="@+id/password_toggle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="12"
-                android:fontFamily="@font/inter_light"
-                android:hint="@string/txt_password_hint"
-                android:inputType="textPassword"
-                    android:textSize="16sp"
-                 />
+                        <EditText
+                        android:id="@+id/password_toggle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:ems="12"
+                        android:fontFamily="@font/inter_light"
+                        android:hint="@string/txt_password_hint"
+                        android:inputType="textPassword"
+                            android:textSize="16sp"
+                         />
 
-                <EditText
-                android:id="@+id/re_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="12"
-                android:fontFamily="@font/inter_light"
-                android:hint="@string/lbl_rpassword"
-                android:inputType="textPassword"
-                    android:textSize="16sp"/>
+                        <EditText
+                        android:id="@+id/re_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:ems="12"
+                        android:fontFamily="@font/inter_light"
+                        android:hint="@string/lbl_rpassword"
+                        android:inputType="textPassword"
+                            android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="or Login with"
+                android:text="@string/login_with"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -187,9 +187,7 @@
                 app:iconTint="@null"
                 app:strokeWidth="0dp" />
 
-
         </LinearLayout>
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

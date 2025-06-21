@@ -11,12 +11,23 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="Sign">If you don’t have a account?</string>
     <string name="Sign_up"> Sign Up</string>
+    <string name="login_with">or Login With</string>
+    <string name="facebook">Login with Facebook</string>
+    <string name="google">Login with Google</string>
+    <string name="login">Login</string>
 
 <!--CREATE ACCOUNT PAGE-->
     <string name="lbl_create_title">Create to your account</string>
     <string name="txt_username_hint">Enter your Username</string>
     <string name="lbl_rpassword">Re-Enter your Password</string>
 
+    <!--FORGOT PASSWORD-->
+    <string name="forgot_sub_title">Enter your email address you signed up with </string>
+    <string name="cont">Continue</string>
+
+<!--FORGOT PASSWORD PIN-->
+    <string name="forgot_psw_title">Enter the verification code sent to your email</string>
+    <string name="resend_pin">Resend Pin</string>
 
 
 </resources>

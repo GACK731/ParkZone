@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(MainActivity.this,CreatAccount.class);
+            Intent intent = new Intent(MainActivity.this,HomePageActivity.class);
             startActivity(intent);
             finish();
         },2000);
