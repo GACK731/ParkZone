@@ -1,6 +1,6 @@
 package com.s23010344.parkzone;
 
-import android.util.Log;
+
 
 
 import android.content.pm.PackageManager;
@@ -30,9 +30,9 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_page);
+        setContentView(R.layout.favourite_parks);
 
-        Log.d("API_KEY", getString(R.string.google_maps_key));
+
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
