@@ -30,7 +30,7 @@
 
         <!-- Blue Circle -->
         <ImageButton
-            android:id="@+id/blue_circle"
+            android:id="@+id/btnNavigationMenu"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_row="0"

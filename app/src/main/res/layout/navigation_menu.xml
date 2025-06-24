@@ -8,22 +8,10 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <!-- Back Button -->
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/back_icon"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/theme_color" />
 
     <!-- Cloud Background Image -->
     <ImageView
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -99,7 +87,7 @@
 
         <!-- Account Setting -->
         <LinearLayout
-            android:id="@+id/menu_account_setting"
+            android:id="@+id/btnAccountSetting"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
@@ -131,7 +119,7 @@
 
         <!-- Favourite parks -->
         <LinearLayout
-            android:id="@+id/menu_favourite_parks"
+            android:id="@+id/btnFavouriteParks"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
@@ -162,7 +150,7 @@
 
         <!-- Add parking place -->
         <LinearLayout
-            android:id="@+id/add_parking"
+            android:id="@+id/btnAddPark"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
@@ -193,7 +181,7 @@
 
         <!-- Parking Countdown -->
         <LinearLayout
-            android:id="@+id/countdown"
+            android:id="@+id/btnCountDown"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
@@ -224,7 +212,7 @@
 
         <!-- About Us -->
         <LinearLayout
-            android:id="@+id/menu_add_parking"
+            android:id="@+id/btnAboutUs"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
@@ -269,7 +257,18 @@
 
     </LinearLayout>
 
-    <!-- Logout Button -->
-
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/back_icon"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/theme_color" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,5 @@
 package com.s23010344.parkzone;
+import android.content.Intent;
 import android.util.Log;
 
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import android.location.Location;
+import android.widget.ImageButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,20 +33,28 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
+    private ImageButton btnNavigationMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
-
+        btnNavigationMenu = findViewById(R.id.btnNavigationMenu);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        btnNavigationMenu.setOnClickListener(v -> {
+            startActivity(new Intent(HomePageActivity.this, NavigationMenuActivity.class));
+            finish();
+        });
     }
 
     @Override

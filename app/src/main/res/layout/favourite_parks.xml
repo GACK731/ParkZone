@@ -23,13 +23,13 @@
 
             <!-- Back Arrow -->
             <ImageView
-                android:id="@+id/backArrow"
+                android:id="@+id/btnBack"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/back_icon"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackgroundBorderless"

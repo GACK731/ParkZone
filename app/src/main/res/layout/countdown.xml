@@ -8,19 +8,7 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <!-- Back Button -->
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="4dp"
-        android:src="@drawable/back_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/theme_color" />
+
 
     <!-- Cloud Background Image -->
     <ImageView
@@ -123,7 +111,34 @@
             app:strokeColor="@color/white"
             app:strokeWidth="2dp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/resetButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Reset"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+
     </LinearLayout>
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/theme_color" />
 
 
 
