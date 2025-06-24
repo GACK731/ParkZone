@@ -83,13 +83,15 @@
         android:id="@+id/bottom_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_button"
+        android:background="@drawable/background"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="16dp"
+        app:tint = "@color/theme_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <!-- Transport Options -->
         <LinearLayout
@@ -170,11 +172,19 @@
                 android:clickable="true"
                 android:focusable="true">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:src="@drawable/ic_walk"-->
-<!--                    android:contentDescription="Walk" />-->
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/bus"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bus"
+                    android:textSize="12sp"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -190,11 +200,19 @@
                 android:clickable="true"
                 android:focusable="true">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:src="@drawable/ic_more"-->
-<!--                    android:contentDescription="More" />-->
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/three_wheel"
+                    android:contentDescription="More" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Three-Wheel"
+                    android:textSize="12sp"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -213,19 +231,21 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/theme_color"
+                android:backgroundTint="@color/white"
                 android:text="Paid"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_paid"
+                android:id="@+id/btn_free"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/theme_color"
+                android:backgroundTint="@color/white"
                 android:text="Free"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 

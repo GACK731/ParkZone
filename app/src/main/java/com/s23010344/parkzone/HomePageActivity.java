@@ -30,9 +30,7 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favourite_parks);
-
-
+        setContentView(R.layout.home_page);
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -60,6 +58,9 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     private void enableMyLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         mMap.setMyLocationEnabled(true); // Shows blue dot
 
         // Move camera to current location
@@ -68,7 +69,7 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
                     if (location != null) {
                         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16f));
-                        mMap.addMarker(new MarkerOptions().position(currentLatLng).title("You are here"));
+
                     }
                 });
     }

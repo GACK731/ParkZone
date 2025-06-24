@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "231626857037",
+    "project_id": "parkzone-5c7dc",
+    "storage_bucket": "parkzone-5c7dc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231626857037:android:9085cf2a9e3d1787341a04",
+        "android_client_info": {
+          "package_name": "com.s23010344.parkzone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDndLfVaK_f3HCLhuXe0miOqJyAcoYXoPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

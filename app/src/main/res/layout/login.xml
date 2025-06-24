@@ -56,24 +56,24 @@
                android:padding="30dp">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/inter_light"
                 android:hint="@string/txt_email_hint"
                 android:inputType="text"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/password_toggle"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_light"
                 android:hint="@string/txt_password_hint"
                 android:inputType="textPassword"
-                android:textSize="14sp"/>
+                android:textSize="16sp"/>
 
            </LinearLayout>
 
@@ -84,10 +84,11 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/inter_light"
                 android:text="@string/forgot_password"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +115,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/login_with"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 />
 
 
@@ -183,10 +184,10 @@
                         android:fontFamily="@font/inter_light"
                         android:text="@string/Sign"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         />
                     <TextView
-                        android:id="@+id/sign_up"
+                        android:id="@+id/txtSignUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -195,7 +196,7 @@
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/Sign_up"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         />
 
                 </LinearLayout>

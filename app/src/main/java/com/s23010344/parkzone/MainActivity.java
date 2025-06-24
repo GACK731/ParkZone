@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(MainActivity.this,HomePageActivity.class);
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
-        },2000);
+        },3000);
 
     }
 }
