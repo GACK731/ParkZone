@@ -1,7 +1,5 @@
 package com.s23010344.parkzone;
-
-
-
+import android.util.Log;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -21,6 +19,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 public class HomePageActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
@@ -50,11 +55,16 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             enableMyLocation();
+            //loading park from firebase
+            loadParksFromFirebase();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
+
+
+
     }
 
     private void enableMyLocation() {
@@ -68,7 +78,7 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
                         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16f));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f));
 
                     }
                 });
@@ -84,4 +94,37 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
             // Permission denied
         }
     }
+
+    private void loadParksFromFirebase() {
+        DatabaseReference ref = FirebaseDatabase.getInstance("https://parkzone-5c7dc-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Parks");//data base path
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("FIREBASE", "Data received: " + snapshot.getChildrenCount());
+                for (DataSnapshot parkSnapshot : snapshot.getChildren()) {
+                    Park park = parkSnapshot.getValue(Park.class);
+                    if (park != null) {
+                        LatLng position = new LatLng(park.latitude, park.longitude);
+                        String title = park.name + " (" + (park.paid ? "Paid" : "Free") + ")";
+                        String snippet = "Allowed: " + String.join(", ", park.vehicleTypes);
+
+                        mMap.addMarker(new MarkerOptions()
+                                .position(position)
+                                .title(title)
+                                .snippet(snippet));
+                    }else{
+                        Log.e("FIREBASE", "Park object is null");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FIREBASE", "Database error: " + error.getMessage());
+                // Handle error if needed
+            }
+        });
+    }
+
 }
