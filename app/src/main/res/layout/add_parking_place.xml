@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rules and Regulations.pdf"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/theme_color"
                 android:layout_marginBottom="32dp"
                 android:clickable="true"
@@ -92,7 +92,7 @@
 
             <!-- Upload Images Card -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_upload_images"
+                android:id="@+id/cardUploadImage"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
