@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -38,6 +39,8 @@
         <activity android:name=".AddParkActivity"/>
         <activity android:name=".CountdownActivity"/>
         <activity android:name=".FavouriteParkActivity"/>
+        <activity android:name=".FeedbackActivity"/>
+
 
 
     </application>

@@ -1,5 +1,8 @@
 package com.s23010344.parkzone;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.util.Log;
 
@@ -19,6 +22,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ImageView;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,7 +52,14 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     private LatLng selectedParkLocation = null;
 
     private MaterialButton btnNavigate;
-     private EditText searchEditText;
+    private EditText searchEditText;
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDitectorActivity shakeDetector;
+
+
+
 
 
 
@@ -61,6 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         EditText searchEditText = findViewById(R.id.searchEditText);
         ImageView searchIcon = findViewById(R.id.search_icon);
+
 
         //filters
         findViewById(R.id.bike_option).setOnClickListener(v -> {
@@ -149,6 +162,20 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
             String query = searchEditText.getText().toString();
             searchParkByName(query);
         });
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager != null) {
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            shakeDetector = new ShakeDitectorActivity();
+            shakeDetector.setOnShakeListener(count -> {
+                // Handle shake event
+                Intent intent = new Intent(HomePageActivity.this, FeedbackActivity.class);
+                startActivity(intent);
+            });
+        }
+
+
+
 
     }
 
@@ -286,6 +313,23 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sensorManager != null && accelerometer != null && shakeDetector != null) {
+            sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sensorManager != null && shakeDetector != null) {
+            sensorManager.unregisterListener(shakeDetector);
+        }
+    }
+
 
 
 

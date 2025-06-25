@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class NavigationMenuActivity extends AppCompatActivity {
 
     private ImageView btnBack;
-    private LinearLayout btnAccountSetting, btnFavouriteParks, btnAddPark, btnAboutUs, btnCountDown;
+    private LinearLayout btnAccountSetting, btnFavouriteParks, btnAddPark, btnFeedback, btnCountDown;
     private TextView tvName, tvEmail;
 
     private FirebaseUser currentUser;
@@ -37,7 +37,7 @@ public class NavigationMenuActivity extends AppCompatActivity {
         btnAccountSetting = findViewById(R.id.btnAccountSetting);
         btnFavouriteParks = findViewById(R.id.btnFavouriteParks);
         btnAddPark = findViewById(R.id.btnAddPark);
-        btnAboutUs = findViewById(R.id.btnAboutUs);
+        btnFeedback = findViewById(R.id.btnFeedback);
         btnCountDown = findViewById(R.id.btnCountDown);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
@@ -64,7 +64,7 @@ public class NavigationMenuActivity extends AppCompatActivity {
             finish();
         });
 
-        btnAboutUs.setOnClickListener(v -> {
+        btnFeedback.setOnClickListener(v -> {
             startActivity(new Intent(NavigationMenuActivity.this, AboutUsActivity.class));
             finish();
         });
