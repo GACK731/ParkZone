@@ -52,7 +52,7 @@
 
         <!-- Name -->
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -63,7 +63,7 @@
 
         <!-- Email -->
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -108,7 +108,7 @@
             app:boxCornerRadiusBottomEnd="50dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your First Name"
@@ -140,7 +140,7 @@
             app:boxCornerRadiusBottomEnd="50dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your Last Name"
@@ -172,7 +172,7 @@
             app:boxCornerRadiusBottomEnd="50dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtLastName"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your Email"
@@ -189,6 +189,7 @@
 
         <!-- Save Button -->
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
