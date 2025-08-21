@@ -7,12 +7,6 @@
     android:id="@+id/home_page"
     tools:context="HomePageActivity">
 
-    <fragment
-        android:id="@+id/map_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
-    
     <GridLayout
         android:id="@+id/search_grid"
         android:layout_width="match_parent"
@@ -82,15 +76,30 @@
 
     </GridLayout>
 
+    <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_grid"
+        >
+
+
+
+    </fragment>
+
     <LinearLayout
         android:id="@+id/bottom_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
         android:elevation="8dp"
         android:orientation="vertical"
         android:padding="16dp"
-        app:tint = "@color/theme_color"
+        app:tint = "@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +188,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/bus"
-                     />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -234,9 +243,9 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/theme_color"
                 android:text="Paid"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -246,9 +255,9 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/theme_color"
                 android:text="Free"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -275,3 +284,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -19,12 +19,25 @@ public class LoginActivity extends AppCompatActivity {
     private MaterialButton btnLogin;
     private FirebaseAuth mAuth;
     private View txtSignUp;
+    private SessionManager sessionManager;
 
     private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        // Initialize session manager
+        sessionManager = new SessionManager(this);
+
+        // Check if user is already logged in
+        if (sessionManager.isLoggedIn()) {
+            // Redirect to home page
+            Intent intent = new Intent(this, HomePageActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.login);
 
         Log.d(TAG, "onCreate called");
@@ -69,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        // Create session
+                        sessionManager.createLoginSession(user.getUid(), email);
 
                         // Go to next activity
                         startActivity(new Intent(LoginActivity.this, HomePageActivity.class));

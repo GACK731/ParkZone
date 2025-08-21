@@ -7,6 +7,7 @@ public class Park {
     public double longitude;
     public boolean paid;
     public List<String> vehicleTypes;
+    public String firebaseKey; // Add this field
 
     public Park() {} // Firebase requires empty constructor
 
@@ -18,4 +19,3 @@ public class Park {
         this.vehicleTypes = vehicleTypes;
     }
 }
-

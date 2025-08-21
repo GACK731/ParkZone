@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,17 +63,30 @@ public class AccountSettingActivity extends AppCompatActivity {
             String lastName = txtLastName.getText().toString().trim();
             String email = txtEmail.getText().toString().trim();
 
+            // Validate email
+            if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                txtEmail.setError("Enter a valid email address");
+                txtEmail.requestFocus();
+                return;
+            }
+
+            // Save data to Firebase
             userRef.child("firstName").setValue(firstName);
             userRef.child("lastName").setValue(lastName);
             userRef.child("email").setValue(email);
 
+            // Update displayed info
             tvName.setText(firstName + " " + lastName);
             tvEmail.setText(email);
 
+            // Optional: Show success message
+            Toast.makeText(AccountSettingActivity.this, "Account updated successfully", Toast.LENGTH_SHORT).show();
 
-            // Go back to navigation menu
-
+            // Navigate back
+            startActivity(new Intent(AccountSettingActivity.this, NavigationMenuActivity.class));
+            finish();
         });
+
 
     }
 

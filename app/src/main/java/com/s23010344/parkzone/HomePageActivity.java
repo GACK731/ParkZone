@@ -39,6 +39,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
 
 public class HomePageActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
@@ -58,7 +63,9 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     private Sensor accelerometer;
     private ShakeDitectorActivity shakeDetector;
 
+    private Park selectedPark; // Add this field to keep track of selected park
 
+    private SessionManager sessionManager;
 
 
 
@@ -66,12 +73,25 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize session manager
+        sessionManager = new SessionManager(this);
+
+        // Check if user is logged in
+        if (!sessionManager.isLoggedIn()) {
+            // Redirect to login activity
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.home_page);
 
         btnNavigationMenu = findViewById(R.id.btnNavigationMenu);
         btnNavigate = findViewById(R.id.btnNavigate);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        EditText searchEditText = findViewById(R.id.searchEditText);
+        searchEditText = findViewById(R.id.searchEditText); // FIX: remove duplicate declaration
         ImageView searchIcon = findViewById(R.id.search_icon);
 
 
@@ -87,12 +107,12 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
         });
 
         findViewById(R.id.three_wheel_option).setOnClickListener(v -> {
-            selectedVehicleType = "Bus";
+            selectedVehicleType = "Three-Wheel";
             loadParksFromFirebase();
         });
 
         findViewById(R.id.bus_option).setOnClickListener(v -> {
-            selectedVehicleType = "Three-Wheel";
+            selectedVehicleType = "Bus";
             loadParksFromFirebase();
         });
 
@@ -195,10 +215,47 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
 
+        // Set custom info window adapter
+        mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(com.google.android.gms.maps.model.Marker marker) {
+                return null; // Use default frame
+            }
+
+            @Override
+            public View getInfoContents(com.google.android.gms.maps.model.Marker marker) {
+                LayoutInflater inflater = LayoutInflater.from(HomePageActivity.this);
+                View view = inflater.inflate(R.layout.custom_info_window, null);
+
+                TextView title = view.findViewById(R.id.info_title);
+                TextView snippet = view.findViewById(R.id.info_snippet);
+                TextView showMore = view.findViewById(R.id.info_show_more);
+
+                title.setText(marker.getTitle());
+                snippet.setText(marker.getSnippet());
+                showMore.setText("Show More");
+
+                // Save park info for navigation
+                selectedPark = (Park) marker.getTag();
+
+                return view;
+            }
+        });
+
         mMap.setOnMarkerClickListener(marker -> {
-            selectedParkLocation = marker.getPosition(); // Save selected marker's location
-            Toast.makeText(this, "Selected park: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-            return false; // Returning false shows default behavior (title/snippet)
+            selectedParkLocation = marker.getPosition();
+            selectedPark = (Park) marker.getTag();
+            marker.showInfoWindow();
+            return true; // Consume event
+        });
+
+        mMap.setOnInfoWindowClickListener(marker -> {
+            Park park = (Park) marker.getTag();
+            if (park != null) {
+                Intent intent = new Intent(HomePageActivity.this, ParkDetailActivity.class);
+                intent.putExtra("park_id", park.firebaseKey); // Use firebase key instead of park.id
+                startActivity(intent);
+            }
         });
 
 
@@ -246,19 +303,24 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
                     Park park = parkSnapshot.getValue(Park.class);
                     if (park == null) continue;
 
+                    // Set the Firebase key
+                    park.firebaseKey = parkSnapshot.getKey();
+
                     // Apply filters
                     if (filterPaid != null && park.paid != filterPaid) continue;
                     if (selectedVehicleType != null && !park.vehicleTypes.contains(selectedVehicleType)) continue;
-
 
                     LatLng position = new LatLng(park.latitude, park.longitude);
                     String title = park.name + " (" + (park.paid ? "Paid" : "Free") + ")";
                     String snippet = "Allowed: " + String.join(", ", park.vehicleTypes);
 
-                    mMap.addMarker(new MarkerOptions()
+                    MarkerOptions options = new MarkerOptions()
                             .position(position)
                             .title(title)
-                            .snippet(snippet));
+                            .snippet(snippet);
+
+                    com.google.android.gms.maps.model.Marker marker = mMap.addMarker(options);
+                    marker.setTag(park); // Attach park object
                 }
             }
 
@@ -284,16 +346,22 @@ public class HomePageActivity extends AppCompatActivity implements OnMapReadyCal
                     Park park = parkSnapshot.getValue(Park.class);
                     if (park == null) continue;
 
+                    // Set the Firebase key
+                    park.firebaseKey = parkSnapshot.getKey();
+
                     // Check if the park name contains the search text (case-insensitive)
                     if (park.name.toLowerCase().contains(query.toLowerCase())) {
                         LatLng position = new LatLng(park.latitude, park.longitude);
                         String title = park.name + " (" + (park.paid ? "Paid" : "Free") + ")";
                         String snippet = "Allowed: " + String.join(", ", park.vehicleTypes);
 
-                        mMap.addMarker(new MarkerOptions()
+                        MarkerOptions options = new MarkerOptions()
                                 .position(position)
                                 .title(title)
-                                .snippet(snippet));
+                                .snippet(snippet);
+
+                        com.google.android.gms.maps.model.Marker marker = mMap.addMarker(options);
+                        marker.setTag(park); // Attach park object
 
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 17f));
                         found = true;
