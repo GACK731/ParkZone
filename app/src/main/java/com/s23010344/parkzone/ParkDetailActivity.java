@@ -18,13 +18,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class ParkDetailActivity extends AppCompatActivity {
 
     private TextView parkNameText, parkLocationText, parkTypeText, parkVehicleTypesText;
-    private ImageView btnBack;
+    private ImageView btnBack, btnFavourite;
     private MaterialButton btnShowDirection;
     private Park currentPark;
     private SessionManager sessionManager;
+    private DatabaseReference userRef;
+    private String currentParkId;
+    private boolean isFavourite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +45,19 @@ public class ParkDetailActivity extends AppCompatActivity {
             return;
         }
 
-        ImageView btnFavourite = findViewById(R.id.btnFavourite);
+        // Initialize Firebase reference for current user
+        String userId = sessionManager.getUserId();
+        userRef = FirebaseDatabase.getInstance("https://parkzone-5c7dc-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("users")
+                .child(userId);
 
-// Flag to track favourite state
-        final boolean[] isFavourite = {false};
+        btnFavourite = findViewById(R.id.btnFavourite);
 
         btnFavourite.setOnClickListener(v -> {
-            if (isFavourite[0]) {
-                // Currently favourite → set back to stroke
-                btnFavourite.setImageResource(R.drawable.favourite_icon_stroke);
-                isFavourite[0] = false;
-            } else {
-                // Currently not favourite → set to filled
-                btnFavourite.setImageResource(R.drawable.favourite_icon);
-                isFavourite[0] = true;
+            if (currentParkId != null) {
+                toggleFavorite();
             }
         });
-
 
         // Initialize views
         parkNameText = findViewById(R.id.park_name);
@@ -85,9 +86,6 @@ public class ParkDetailActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         // Get park ID from intent
         String parkId = getIntent().getStringExtra("park_id");
 
@@ -99,7 +97,84 @@ public class ParkDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void toggleFavorite() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if (user == null) {
+                    // Create new user data if it doesn't exist
+                    user = new User();
+                    user.email = sessionManager.getUserEmail();
+                    user.username = extractUsernameFromEmail(user.email);
+                    user.favourite_parks = new ArrayList<>();
+                }
+
+                // Ensure favourite_parks list exists
+                if (user.favourite_parks == null) {
+                    user.favourite_parks = new ArrayList<>();
+                }
+
+                if (user.favourite_parks.contains(currentParkId)) {
+                    // Remove from favorites
+                    user.favourite_parks.remove(currentParkId);
+                    btnFavourite.setImageResource(R.drawable.favourite_icon_stroke);
+                    isFavourite = false;
+                    Toast.makeText(ParkDetailActivity.this, "Removed from favorites", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Add to favorites
+                    user.favourite_parks.add(currentParkId);
+                    btnFavourite.setImageResource(R.drawable.favourite_icon);
+                    isFavourite = true;
+                    Toast.makeText(ParkDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                }
+
+                // Save updated user data to Firebase
+                userRef.setValue(user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ParkDetailActivity.this, "Error updating favorites: " + error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private String extractUsernameFromEmail(String email) {
+        if (email != null && email.contains("@")) {
+            return email.substring(0, email.indexOf("@"));
+        }
+        return "Unknown";
+    }
+
+    private void checkIfFavorite() {
+        if (currentParkId == null) return;
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null && user.favourite_parks != null &&
+                        user.favourite_parks.contains(currentParkId)) {
+                    btnFavourite.setImageResource(R.drawable.favourite_icon);
+                    isFavourite = true;
+                } else {
+                    btnFavourite.setImageResource(R.drawable.favourite_icon_stroke);
+                    isFavourite = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error silently for favorite check
+            }
+        });
+    }
+
     private void loadParkDetails(String parkId) {
+        currentParkId = parkId;
         DatabaseReference ref = FirebaseDatabase.getInstance("https://parkzone-5c7dc-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("Parks")
                 .child(parkId);
@@ -120,6 +195,9 @@ public class ParkDetailActivity extends AppCompatActivity {
                     } else {
                         parkVehicleTypesText.setText("Allowed: Not specified");
                     }
+
+                    // Check if this park is already favorited
+                    checkIfFavorite();
                 } else {
                     Toast.makeText(ParkDetailActivity.this, "Park not found", Toast.LENGTH_SHORT).show();
                 }

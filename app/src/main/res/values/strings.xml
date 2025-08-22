@@ -9,7 +9,8 @@
     <string name="txt_email_hint">Enter your Email</string>
     <string name="txt_password_hint">Enter your Password</string>
     <string name="forgot_password">Forgot Password</string>
-    <string name="Sign">If you don’t have a account?</string>
+    <string name="Sign">If you don’t have an account?</string>
+    <string name="Login">If you already have an account?</string>
     <string name="Sign_up"> Sign Up</string>
     <string name="login_with">or Login With</string>
     <string name="facebook">Login with Facebook</string>

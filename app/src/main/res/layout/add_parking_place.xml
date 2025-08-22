@@ -57,6 +57,23 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="32dp" />
 
+            <!-- Parking Name Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Parking Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_parking_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Warning Message -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -94,22 +111,22 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardUploadImage"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="98dp"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/gray"
-                app:cardElevation="0dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Upload Images"
-                    android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:layout_gravity="center" />
+                    android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -117,47 +134,134 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_add_location"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/gray"
-                app:cardElevation="0dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="24dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
 
                 <TextView
+                    android:id="@+id/tv_location_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Add Location"
-                    android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:layout_gravity="center" />
+                    android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Documents Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_documents"
+            <!-- Parking Type Selection -->
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginBottom="40dp"
-                app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@color/gray"
-                app:cardElevation="0dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:layout_height="wrap_content"
+                android:text="Parking Type"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group_parking_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
+
+                <RadioButton
+                    android:id="@+id/radio_free"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Documents"
+                    android:layout_weight="1"
+                    android:text="Free"
                     android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:layout_gravity="center" />
+                    android:checked="true" />
 
-            </androidx.cardview.widget.CardView>
+                <RadioButton
+                    android:id="@+id/radio_paid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Paid"
+                    android:textSize="16sp" />
+            </RadioGroup>
+
+            <!-- Hourly Rate (Only visible when Paid is selected) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_hourly_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Hourly Rate (LKR)"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_hourly_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Vehicle Types Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Available Vehicle Types"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Car"
+                    android:textSize="16sp"
+                    android:checked="true"
+                    android:layout_marginBottom="4dp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_motorcycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Motorcycle"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_van"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Van"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_bus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bus"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_truck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Truck"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <!-- Proceed Button -->
             <LinearLayout
@@ -165,6 +269,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal">
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_proceed"
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -38,9 +38,12 @@
         <activity android:name=".AccountSettingActivity"/>
         <activity android:name=".AddParkActivity"/>
         <activity android:name=".CountdownActivity"/>
+        <activity android:name=".FavoriteParksActivity"/>
         <activity android:name=".FavouriteParkActivity"/>
         <activity android:name=".FeedbackActivity"/>
         <activity android:name=".ParkDetailActivity"/>
+        <activity android:name=".ShakeDitectorActivity"/>
+        <activity android:name=".MapLocationPickerActivity" />
 
 
 

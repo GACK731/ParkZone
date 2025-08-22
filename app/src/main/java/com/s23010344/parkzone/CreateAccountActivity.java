@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
@@ -19,6 +20,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText txtEmail, txtUsername, txtPassword, txtRePassword;
     private CheckBox checkBoxTerms;
     private MaterialButton btnCreateAccount;
+    private TextView txtLogin;
     private FirebaseAuth mAuth;
 
     @Override
@@ -34,8 +36,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         txtRePassword = findViewById(R.id.txtRePassword);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
         checkBoxTerms = findViewById(R.id.checkBoxTerms);
+        txtLogin = findViewById(R.id.txtLogin);
 
         btnCreateAccount.setOnClickListener(v -> registerUser());
+
+        // Add click listener for login navigation
+        txtLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Optional: finish current activity so user can't go back with back button
+        });
     }
 
     private void registerUser(){

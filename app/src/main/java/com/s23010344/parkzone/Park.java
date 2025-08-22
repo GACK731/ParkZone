@@ -2,6 +2,7 @@ package com.s23010344.parkzone;
 import java.util.List;
 
 public class Park {
+    public String id; // Add ID field for park identification
     public String name;
     public double latitude;
     public double longitude;
